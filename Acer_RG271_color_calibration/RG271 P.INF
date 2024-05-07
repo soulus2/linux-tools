@@ -1,0 +1,125 @@
+; Copyright 2017 ACR International (Europe) GmbH
+; This is a Setup information file for monitors with ICM file.
+
+
+[Version]
+signature="$CHICAGO$"
+Class=Monitor
+ClassGuid={4D36E96E-E325-11CE-BFC1-08002BE10318}
+Provider=%ACR%
+Catalogfile=RG271 P.cat
+DriverVer=02/01/2019,1.0.0.0
+
+[ControlFlags]
+ExcludeFromSelect.nt=Monitor\ACR0784
+ExcludeFromSelect.nt=Monitor\ACR0784
+ExcludeFromSelect.nt=Monitor\ACR0784
+
+[DestinationDirs]
+DefaultDestDir=11
+0784_H1.CopyFiles=23
+0784_H2.CopyFiles=23
+0784_P.CopyFiles=23
+
+
+[SourceDisksNames]
+1=%DiskName%,,,
+
+[SourceDisksFiles]
+RG271 P.ICM=1
+
+[Monitor_Service.Install]
+DisplayName    = %Monitor.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\monitor.sys
+
+
+[Manufacturer]
+%ACR%=ACR,ntamd64
+
+[ACR]
+%0784_H1%=0784_H1.Install, Monitor\ACR0784
+%0784_H2%=0784_H2.Install, Monitor\ACR0784
+%0784_P%=0784_P.Install, Monitor\ACR0784
+
+[ACR.ntx86]
+%0784_H1%=0784_H1.Install, Monitor\ACR0784
+%0784_H2%=0784_H2.Install, Monitor\ACR0784
+%0784_P%=0784_P.Install, Monitor\ACR0784
+
+[ACR.ntamd64]
+%0784_H1%=0784_H1.Install, Monitor\ACR0784
+%0784_H2%=0784_H2.Install, Monitor\ACR0784
+%0784_P%=0784_P.Install, Monitor\ACR0784
+
+
+[0784_H1.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=0784_H1.AddReg
+Copyfiles=0784_H1.CopyFiles
+
+[0784_H1.Install.Services]
+AddService = monitor, %SPSVCINST_ASSOCSERVICE%,Monitor_Service.Install
+
+[0784_H2.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=0784_H2.AddReg
+Copyfiles=0784_H2.CopyFiles
+
+[0784_H2.Install.Services]
+AddService = monitor, %SPSVCINST_ASSOCSERVICE%,Monitor_Service.Install
+
+[0784_P.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=0784_P.AddReg
+Copyfiles=0784_P.CopyFiles
+
+[0784_P.Install.Services]
+AddService = monitor, %SPSVCINST_ASSOCSERVICE%,Monitor_Service.Install
+
+
+[DEL_CURRENT_REG]
+HKR,MODES
+HKR,,MaxResolution
+HKR,,DPMS
+HKR,,ICMProfile
+
+[0784_H1.AddReg]
+HKR,"MODES\1920,1080",Mode1,,"56.0-186.0,48.0-165.0,+,+"
+HKR,,MaxResolution,,"1920,1080"
+HKR,,DPMS,,1
+HKR,,ICMProfile,0,"RG271 P.icm" 
+
+[0784_H2.AddReg]
+HKR,"MODES\1920,1080",Mode1,,"56.0-186.0,48.0-165.0,+,+"
+HKR,,MaxResolution,,"1920,1080"
+HKR,,DPMS,,1
+HKR,,ICMProfile,0,"RG271 P.icm"
+
+[0784_P.AddReg]
+HKR,"MODES\1920,1080",Mode1,,"186.0-186.0,48.0-165.0,+,+"
+HKR,,MaxResolution,,"1920,1080"
+HKR,,DPMS,,1
+HKR,,ICMProfile,0,"RG271 P.icm"
+
+[0784_H1.CopyFiles]
+RG271 P.icm
+
+[0784_H2.CopyFiles]
+RG271 P.icm
+
+[0784_P.CopyFiles]
+RG271 P.icm
+
+[Strings]
+SPSVCINST_ASSOCSERVICE = 0x00000002
+Monitor.SVCDESC = "Microsoft Monitor Class Function Driver Service"
+
+ACR="ACR International (Europe) GmbH"
+DiskName="ACR Monitor Installation Disk"
+
+0784_H1="ACR RG271 P"
+0784_H2="ACR RG271 P"
+0784_P="ACR RG271 P"

@@ -1,0 +1,6 @@
+#!/bin/bash
+mkdir ./PNGs;
+for entry in `ls $search_dir`; do
+  dwebp $entry -o ./PNGs/$entry.png;
+done
+
